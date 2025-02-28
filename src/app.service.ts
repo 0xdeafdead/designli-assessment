@@ -19,17 +19,13 @@ export class AppService {
   getLinksFromWebsite(html: string): string[] {
     const $ = load(html);
     let links: string[] = [];
-    // links = this.getLinksFromWebsite(html);
-    // $('a').each((_, element) => {
-    //   const text = $(element).text();
-    //   console.log($(element).text(), ' => ', this.getLinksMatch(text));
-    //   // console.log($(element).text(), ' => ', $(element).attr('href'));
-    //   // const href = $(element).attr('href');
-    //   // if (href) {
-    //   //   links.push(href);
-    //   // }
-    // });
-    // console.log('linksFromWeb', links);
+    $('a').each((_, element) => {
+      const href = $(element).attr('href');
+      if (href && href.endsWith('.json')) {
+        links.push(href);
+      }
+    });
+    console.log('linksFromWeb', links);
     return links;
   }
 
@@ -41,17 +37,21 @@ export class AppService {
     );
   }
 
-  async checkIfLinkOnBody(emailBody: string | undefined) {
-    if (emailBody) {
-      const links = this.getLinksMatch(emailBody);
+  async checkJsonOnLinks(links: string[], depth: number = 0) {
+    if (depth <= 1) {
       console.log('links', links);
       for (const link of links) {
         const response = await fetch(link, {
           method: 'GET',
           headers: {
             'User-Agent': 'Mozilla/5.0',
+            'Content-Type': 'application/json',
           },
+        }).catch((err) => {
+          console.error(`[${link}]=>${err}`);
+          return null;
         });
+        if (response == null) continue;
         console.log('response', response);
         const contentTypeHeader = response.headers.get('content-Type');
         if (
@@ -63,33 +63,13 @@ export class AppService {
 
         if (contentTypeHeader && contentTypeHeader.includes('text/html')) {
           const data = await response.text();
-          console.log('data', data);
+          // console.log('data', data);
           const newLinks = this.getLinksFromWebsite(data);
-          return JSON.parse(`{}`);
+          return this.checkJsonOnLinks(newLinks, depth + 1);
         }
       }
-      if (links) {
-        links.forEach((link) => {
-          console.log('link', link);
-          fetch('link', {
-            method: 'GET',
-
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          })
-            .then(async (res) => {
-              const response = await JSON.parse(await res.text());
-              // console.log('response', res.body.);
-              console.log('response.records', response);
-            })
-            .catch((err) => {
-              console.log('err fetching', err);
-            });
-        });
-      }
     }
-    return new InternalServerErrorException('No body on email');
+    return new InternalServerErrorException('No JSON or web link found');
   }
 
   async parseEmail({ emailPath, url }: { emailPath?: string; url?: string }) {
@@ -105,21 +85,20 @@ export class AppService {
       emailPath = tempFilePath;
     }
 
-    // console.log('emailPath', emailPath);
     let eml = readFileSync(emailPath!, { encoding: 'utf-8' });
     const parsedEmail = await simpleParser(eml);
-    // console.log('parsedEmail', parsedEmail);
-    // if (parsedEmail.attachments.length > 0) {
     const jsonFile = parsedEmail.attachments.find((attachment) => {
       return attachment.contentType === 'application/json';
     });
     if (jsonFile) {
       return JSON.parse(jsonFile.content.toString());
     }
-    // }
 
     const emailBody = parsedEmail.text;
-    return this.checkIfLinkOnBody(emailBody);
-    // }
+    if (emailBody) {
+      const links = this.getLinksMatch(emailBody);
+      return this.checkJsonOnLinks(links);
+    }
+    return new InternalServerErrorException('No body on email');
   }
 }
