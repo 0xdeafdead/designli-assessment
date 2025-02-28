@@ -12,6 +12,7 @@ import {
 } from 'fs';
 import { simpleParser } from 'mailparser';
 import { load } from 'cheerio';
+import { catchError, from, Observable, of, switchMap, throwError } from 'rxjs';
 
 @Injectable()
 export class AppService {
@@ -40,43 +41,42 @@ export class AppService {
     );
   }
 
-  async checkJsonOnLinks(links: string[], depth: number = 0) {
-    if (depth <= 1) {
-      console.log('links', links);
-      for (const link of links) {
-        const response = await fetch(link, {
-          method: 'GET',
-          headers: {
-            'User-Agent': 'Mozilla/5.0',
-            'Content-Type': 'application/json',
-          },
-        }).catch((err) => {
-          console.error(`[${link}]=>${err}`);
-          return null;
-        });
-        if (response == null) continue;
-        console.log('response', response);
-        const contentTypeHeader = response.headers.get('content-Type');
-        if (
-          contentTypeHeader &&
-          contentTypeHeader.includes('application/json')
-        ) {
-          return JSON.parse(await response.text());
-        }
+  async checkJsonOnLinks(links: string[], depth: number = 0): Promise<string> {
+    if (depth > 1)
+      throw new InternalServerErrorException('No JSON or web link found');
+    console.log('links', links);
+    for (const link of links) {
+      const response = await fetch(link, {
+        method: 'GET',
+        headers: {
+          'User-Agent': 'Mozilla/5.0',
+          'Content-Type': 'application/json',
+        },
+      }).catch((err) => {
+        console.error(`[${link}]=>${err}`);
+        return null;
+      });
+      if (response == null) continue;
+      const data = await response.text();
+      const contentTypeHeader = response.headers.get('content-Type');
+      if (contentTypeHeader && contentTypeHeader.includes('application/json')) {
+        return JSON.parse(data);
+      }
 
-        if (contentTypeHeader && contentTypeHeader.includes('text/html')) {
-          const data = await response.text();
-          const newLinks = this.getLinksFromWebsite(data);
-          return this.checkJsonOnLinks(newLinks, depth + 1);
-        }
+      if (contentTypeHeader && contentTypeHeader.includes('text/html')) {
+        const newLinks = this.getLinksFromWebsite(data);
+        return this.checkJsonOnLinks(newLinks, depth + 1);
       }
     }
-    return new InternalServerErrorException('No JSON or web link found');
+    throw new InternalServerErrorException('No JSON or web link found');
   }
 
-  async parseEmail({ emailPath, url }: { emailPath?: string; url?: string }) {
+  async validateInput(
+    emailPath: string | undefined,
+    url: string | undefined,
+  ): Promise<string> {
     if (!emailPath && !url) {
-      throw new BadRequestException('email or url is required');
+      throw new BadRequestException('emailPath or url is required');
     }
     if (url) {
       let filePath = 'emails/temp-email';
@@ -96,21 +96,37 @@ export class AppService {
       writeFileSync(filePath, emailData);
       emailPath = filePath;
     }
+    return readFileSync(emailPath!, { encoding: 'utf-8' });
+  }
 
-    let eml = readFileSync(emailPath!, { encoding: 'utf-8' });
-    const parsedEmail = await simpleParser(eml);
-    const jsonFile = parsedEmail.attachments.find((attachment) => {
-      return attachment.contentType === 'application/json';
-    });
-    if (jsonFile) {
-      return JSON.parse(jsonFile.content.toString());
-    }
+  parseEmail({
+    emailPath,
+    url,
+  }: {
+    emailPath?: string;
+    url?: string;
+  }): Observable<string> {
+    return from(this.validateInput(emailPath, url)).pipe(
+      switchMap((eml) => from(simpleParser(eml))),
+      switchMap((parsedEmail) => {
+        const attachment = parsedEmail.attachments.find(
+          (attachment) => attachment.contentType === 'application/json',
+        );
+        if (attachment) {
+          return of(JSON.parse(attachment.content.toString()));
+        }
 
-    const emailBody = parsedEmail.text;
-    if (emailBody) {
-      const links = this.getLinksMatch(emailBody);
-      return this.checkJsonOnLinks(links);
-    }
-    return new InternalServerErrorException('No body on email');
+        const emailBody = parsedEmail.text;
+        if (emailBody) {
+          const links = this.getLinksMatch(emailBody);
+          return from(this.checkJsonOnLinks(links));
+        }
+        throw new InternalServerErrorException('No body on email');
+      }),
+      catchError((err) => {
+        console.error(err);
+        return throwError(() => new InternalServerErrorException(err));
+      }),
+    );
   }
 }

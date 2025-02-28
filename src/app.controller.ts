@@ -1,5 +1,7 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AppService } from './app.service';
+import { Observable } from 'rxjs';
+import { ParserInputDTO } from './dto/parserInput.dto';
 
 @Controller()
 export class AppController {
@@ -11,9 +13,7 @@ export class AppController {
   }
 
   @Post('/parse')
-  parseEmail(
-    @Body() input: { emailPath: string | undefined; url: string | undefined },
-  ) {
+  parseEmail(@Body() input: ParserInputDTO): Observable<string> {
     return this.appService.parseEmail(input);
   }
 }
