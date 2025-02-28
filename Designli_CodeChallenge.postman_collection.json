@@ -1,0 +1,196 @@
+{
+	"info": {
+		"_postman_id": "3c426070-8c4e-4575-8ed2-157b1f5f6942",
+		"name": "Designli_CodeChallenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38179981"
+	},
+	"item": [
+		{
+			"name": "Parse email with link to web with json",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"emailPath\":\"{projectWorkdirFromProject}/email_with_link_to_web_with_json.eml\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/parse",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"parse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Parse email with link to json",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"emailPath\":\"{projectWorkdirFromProject}/email_with_link_to_json.eml\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/parse",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"parse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Parse email with json attached",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"emailPath\":\"{projectWorkdirFromProject}/email_with_json_attached.eml\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/parse",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"parse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Parse email on url with link to web with json",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"url\":\"https://0xdeafdead.github.io/designli-assessment/email_with_link_to_web_with_json.eml\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/parse",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"parse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Parse email on url with link to json",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"url\":\"https://0xdeafdead.github.io/designli-assessment/email_with_link_to_json.eml\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/parse",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"parse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Parse email on url with json attached",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"url\":\"https://0xdeafdead.github.io/designli-assessment/email_with_json_attached.eml\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/parse",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"parse"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

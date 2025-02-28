@@ -29,7 +29,6 @@ export class AppService {
         links.push(href);
       }
     });
-    console.log('linksFromWeb', links);
     return links;
   }
 
@@ -44,7 +43,6 @@ export class AppService {
   async checkJsonOnLinks(links: string[], depth: number = 0): Promise<string> {
     if (depth > 1)
       throw new InternalServerErrorException('No JSON or web link found');
-    console.log('links', links);
     for (const link of links) {
       const response = await fetch(link, {
         method: 'GET',
