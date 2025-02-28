@@ -24,6 +24,9 @@ Then to run
 npm run start
 ```
 The project should run on port 3000 by default. 
+
+## Testing
+
 To use the endpoint with the email parser, hit http://localhost:3000/parser with a POST request.
 
 Additionally, I've included a postman collection with the request to test the endpoint on the different scenarios.
@@ -31,10 +34,7 @@ Replace the `{projectWorkdirFromProject}` from the emailPath parameter on the qu
 
 All cases should return the same JSON named 'ses-sns-event.json' that's also included in this repository.
 
-
-## Testing
-
-You can use the following JSON file for testing the third scenario:
+You can use the following JSON file for testing the second and third scenario:
 [ses-sns-event.json](https://0xdeafdead.github.io/designli-assessment/ses-sns-event.json).
 
 ## License
