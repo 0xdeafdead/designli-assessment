@@ -3,11 +3,14 @@ import {
   Injectable,
   InternalServerErrorException,
 } from '@nestjs/common';
-import { readFileSync, writeFileSync } from 'fs';
+import {
+  existsSync,
+  mkdirSync,
+  readdirSync,
+  readFileSync,
+  writeFileSync,
+} from 'fs';
 import { simpleParser } from 'mailparser';
-import { catchError, EMPTY, from, of, switchMap, throwError } from 'rxjs';
-import { join } from 'path';
-import { Readable } from 'stream';
 import { load } from 'cheerio';
 
 @Injectable()
@@ -63,7 +66,6 @@ export class AppService {
 
         if (contentTypeHeader && contentTypeHeader.includes('text/html')) {
           const data = await response.text();
-          // console.log('data', data);
           const newLinks = this.getLinksFromWebsite(data);
           return this.checkJsonOnLinks(newLinks, depth + 1);
         }
@@ -77,12 +79,22 @@ export class AppService {
       throw new BadRequestException('email or url is required');
     }
     if (url) {
-      const tempFilePath = 'temp-email.eml';
-      const res = await fetch(url);
-      console.log('res', res);
-      const text = await res.text();
-      writeFileSync(tempFilePath, text);
-      emailPath = tempFilePath;
+      let filePath = 'emails/temp-email';
+      if (!existsSync('emails')) {
+        mkdirSync('emails');
+        filePath = `${filePath}-0.eml`;
+      } else {
+        const fileLength = readdirSync('emails').length;
+        filePath = `${filePath}-${new String(fileLength)}.eml`;
+      }
+      const res = await fetch(url).catch((err) => {
+        throw new InternalServerErrorException(
+          'Could not process url to email',
+        );
+      });
+      const emailData = await res.text();
+      writeFileSync(filePath, emailData);
+      emailPath = filePath;
     }
 
     let eml = readFileSync(emailPath!, { encoding: 'utf-8' });
