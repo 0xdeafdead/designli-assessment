@@ -1,0 +1,200 @@
+Delivered-To: raulalcantara96@gmail.com
+Received: by 2002:a05:6000:2ac:b0:38d:c5cb:405 with SMTP id l12csp535876wry;
+        Thu, 27 Feb 2025 20:50:24 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGARKE1yUX3VxFpf3+asZYZY8N/c3hKAtogoTOEFQGmzzYEUYjRFGyXhHLLjTWk7oG7HrJX
+X-Received: by 2002:a17:902:dac4:b0:220:d6be:5bba with SMTP id d9443c01a7336-223691f8e61mr34035355ad.33.1740718224358;
+        Thu, 27 Feb 2025 20:50:24 -0800 (PST)
+ARC-Seal: i=2; a=rsa-sha256; t=1740718224; cv=pass;
+        d=google.com; s=arc-20240605;
+        b=NtU4c87i0jrV8dR/mhqfo958QMMAn2hdOdYCwY1vrvBVmSpeyKjwy+glBadMYoidXp
+         z1HM3tqbzID92WuCMRdZ94qzyqbi3dRvgSXMj7txJr+ASoi0E2xinJ4VUg6Q0PjqjXb1
+         chmLdqu1md6MOtIR44VA+L1128SIl7nJl2VJHHzlDY+CQyOmiD3MEfxL56QwsLIeMlie
+         R0a+uSCvRx9towXKM08wg7b85zOJ5VT6LOFh0sIkTSCGI3Q8Q5HM4GAlCkq0Q/7MOUyF
+         UxAsIRzJ+nialP2m16ySIvxauS0S2kEBDPOAJ/sMl2111M89bOtygUXZDXRSgQtJcdXE
+         2NSA==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=mime-version:content-language:accept-language:message-id:date
+         :thread-index:thread-topic:subject:to:from:dkim-signature;
+        bh=UHrNxWsxTc3ho6+fxProtImgf/dyHdOENdFGbSI0fww=;
+        fh=8u1izjdvNJvsAfgeapCRysIFGCODuOFLd6umtuNZcO4=;
+        b=bQ9UWHtCpO7GOMP7c3UCUhEczv7gjVEdOR8dnCEc+JieGbMme89lWtLSyGaHZnk/gr
+         BzLl3azr3PS0jr+/IZWPwUpiNnahtT+QYKb+xNJPhcdkeYKTL7YO4ogB+M1bq7o8O6go
+         7qdG5DFchJtXl1axDSRnME/Svlhx3OwlemxekTfOap8spc1yiclPcKCkGCspIQ+lhMw5
+         Zl1v6FkfjuwpCeUan7UIifIpMTy+17TL458geVmGSdpaRuTpz4t7zQvEJWg8qngCr4nU
+         DK9OnhibdUE+O0q+UVWoM1CtNjvzICQOrt5gHS/B6GIdIgjoOSUKuoy1143qo8nu5xs+
+         +l3g==;
+        dara=google.com
+ARC-Authentication-Results: i=2; mx.google.com;
+       dkim=pass header.i=@hotmail.com header.s=selector1 header.b=DKZ9koCR;
+       arc=pass (i=1);
+       spf=pass (google.com: domain of raulalcantara_96@hotmail.com designates 2a01:111:f403:2c16::80e as permitted sender) smtp.mailfrom=raulalcantara_96@hotmail.com;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=hotmail.com
+Return-Path: <raulalcantara_96@hotmail.com>
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com (mail-co1nam11olkn2080e.outbound.protection.outlook.com. [2a01:111:f403:2c16::80e])
+        by mx.google.com with ESMTPS id 98e67ed59e1d1-2fea696e417si4782141a91.84.2025.02.27.20.50.23
+        for <raulalcantara96@gmail.com>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 27 Feb 2025 20:50:24 -0800 (PST)
+Received-SPF: pass (google.com: domain of raulalcantara_96@hotmail.com designates 2a01:111:f403:2c16::80e as permitted sender) client-ip=2a01:111:f403:2c16::80e;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@hotmail.com header.s=selector1 header.b=DKZ9koCR;
+       arc=pass (i=1);
+       spf=pass (google.com: domain of raulalcantara_96@hotmail.com designates 2a01:111:f403:2c16::80e as permitted sender) smtp.mailfrom=raulalcantara_96@hotmail.com;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=hotmail.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Vc2pTpCGcHe/amAYLPFF7BniQ4T/wO3Gb7V4qe3awzhHv6+RiFT5GA6peq7lJF4OnB2ManrM6FtX5VoGrowMGZcX5tkasr+u/iyhienLqPxEu78u8w214yR8iG5QefIUf4a6DfDIorVzVq1zyVufUqfDPe3C77VQUL7mcSlYrbTXkOX7i4ToJFxuOGPvqi1fM/+wX2QjSV0xeUaGxRZOYnkzTcD8xo189LDZQc7hQj2N7yMxnRyPAqRBWCanKSjHUAEdYcXDJohpFVYxPt8nDbgwZARwRVGwf9S082v6U7HlezfY47Z9SCLjdSqbIzsSAbzeMBRjZ3PVppw261zeAg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=UHrNxWsxTc3ho6+fxProtImgf/dyHdOENdFGbSI0fww=;
+ b=JNL0Yn+MZrMt0lNYWie8Wn3iouuxZxuU1XU3avpNse13cyUu6Nnkon0uQ2N86kDOH/S4afrMxZ0t1Hwte7XsCK4BlZSflQNTv7k5/SjV/D0/QsMZrjfqHQahE1H1N5Oa43F6x/OTB2Ewye4JtHpsAssWe8KcX2ab4D37qVoCCDOFSOHKsoUocYHBNcoiSQkpWOM06F28zBqxDg2xHJ5TOYW0EFAfcLVgMcqN92xkt6THgd6qBMvxLegzLB66WvHS9LHO4GQmIOdG56BgyjapUMPTTb4cHRLylWhJOBlNXI7INcnIwsjjn2Z6T/XCkWbP6414eYsUJP9yQEEgjInQQQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=UHrNxWsxTc3ho6+fxProtImgf/dyHdOENdFGbSI0fww=;
+ b=DKZ9koCR3jTkMupCKmTiMoZ2AVHImD9oVPWUwpZ+eZlm4AEX1r+Nubf1XVNa3oozwAl/YOwpEi30d2FDc1yhBJw9QSJnqHlzx061ZmAfEO0dWTWIQ3IfQDtjD/B3le/K0QPcYQPxEl7LfL2kHGAhIeVTjaVpWoi4Kh/6ZCfkxULyKqbdN11F+KAXeIBuFb8YHDVcATPTjAljIVeJ2g03PoLKeuoUehCgA7jVaTuXa1gKFiVq3iLiUrP4IUAG7fV8XjA0z5ZYCUoiNOmQ8xfA7zcsXfUMj7njygDFFTJB8swpO0zKwtZ47YtK6Z3WlURzCSBG+YlL9dwSKk3V0Anv+w==
+Received: from BYAPR12MB2742.namprd12.prod.outlook.com (2603:10b6:a03:6a::16)
+ by PH8PR12MB6961.namprd12.prod.outlook.com (2603:10b6:510:1bc::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8489.23; Fri, 28 Feb
+ 2025 04:50:22 +0000
+Received: from BYAPR12MB2742.namprd12.prod.outlook.com
+ ([fe80::b019:3325:d4b3:f367]) by BYAPR12MB2742.namprd12.prod.outlook.com
+ ([fe80::b019:3325:d4b3:f367%6]) with mapi id 15.20.8466.016; Fri, 28 Feb 2025
+ 04:50:22 +0000
+From: Raul Alcantara <raulalcantara_96@hotmail.com>
+To: Raul Alcantara <raulalcantara96@gmail.com>
+Subject: Email with link to web with json
+Thread-Topic: Email with link to web with json
+Thread-Index: AQHbiZuPEoUUI8GjJk+Bil1ZlIqICQ==
+Date: Fri, 28 Feb 2025 04:50:22 +0000
+Message-ID:
+ <BYAPR12MB2742CECA81628318B53C0FA3F2CC2@BYAPR12MB2742.namprd12.prod.outlook.com>
+Accept-Language: es-HN, en-US
+Content-Language: en-GB
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+x-ms-reactions: allow
+x-ms-exchange-messagesentrepresentingtype: 1
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: BYAPR12MB2742:EE_|PH8PR12MB6961:EE_
+x-ms-office365-filtering-correlation-id: 925f682a-272c-4ce3-9be3-08dd57b368dc
+x-microsoft-antispam:
+ BCL:0;ARA:14566002|12050799009|461199028|9400799030|7092599003|14030799003|8062599003|15080799006|8060799006|19110799003|102099032|10035399004|440099028|3412199025;
+x-microsoft-antispam-message-info:
+ =?us-ascii?Q?iX/WTiD7kGJ+4t3sV+JzN7ZtQax9R1waosEeop3KLw11dyGN2cY25XLfnyAk?=
+ =?us-ascii?Q?cBVIygeo7T8fPvKhwdjQDQpj8Np8c/DCgu3TtxpkhmkCvZalhRQBay7Q9eNO?=
+ =?us-ascii?Q?d0mxkwxre3Zze5QtoJ47C/7Ve4CDzemAebCw9O8MWddOHcBXrczmxyNAawtK?=
+ =?us-ascii?Q?ekzc/QRqHVZbkLvr7jQ83CnaN0LyH6DNzfg4nYQ8KryPiVVa2lTdcT/NnKmr?=
+ =?us-ascii?Q?jQqz4ys8jUuzLRIp9P6HBpXkc8rm4diFPtax/R8EnlpTQXTloCV0fJR8cpar?=
+ =?us-ascii?Q?MX+9g+0jLz8pSkHpXuDEaOW1Lxc1S9dwGmIVUys5KsuVLHjK2rkjrJ2WLesC?=
+ =?us-ascii?Q?841Z+4EZg/iqhxjqpuuc9XVjG5r07FgqrntrosShPL+NAuN8Xe27m+n9gLoa?=
+ =?us-ascii?Q?p7Ljwf1pp4T/OILlxCWdNibC1bf/ipPdrwkMuj7UBuui9CzBLK6fPxTqMNS7?=
+ =?us-ascii?Q?8rXRVMCbhT70wvMltdfDgQncL6916w67x1sQicmGXp2Oya0zrwllo47+Kmvv?=
+ =?us-ascii?Q?+8sEGVuOgFykw30tnp8ufeYeTGpSKG+fT2P/Hsv9+Y1GhsDGpZlIIZnF9j85?=
+ =?us-ascii?Q?H2lqJLI8ZbDubhEL47y9SkNTNmANDBB06Pg/2gLxGcXs5+j8X0tPTMyuVpW3?=
+ =?us-ascii?Q?iZatGOimuvLAui1ovTM0HC1meFIUpMtiJBP0xw0NNoWiObdAoH7zUIR1VB9t?=
+ =?us-ascii?Q?3tBxGZfwSNoAkE4f/lsKF3DS73oL2W9xqUj2qEHbVAp2R/7nfIT8gWEBXbSz?=
+ =?us-ascii?Q?de1txpFntjMDSo10jHPiV1n8/b13eCPqnfnypyKALsWQlg7mrKaCas0IaXcp?=
+ =?us-ascii?Q?5IkBNlpPChKPVRutWcX+CysF0d1kl+JKSSeVOjBdujxTqAtS3gZoXIjmERa5?=
+ =?us-ascii?Q?XNT5y9qWQshoT0mX8RaJs80t5JjmS7iWVY7NIPoAxFYqotA4EN9hLNaKlQhe?=
+ =?us-ascii?Q?ZZGLvOnYNEgRxttxTZhs0glvcRUwXbqFrywyhKF4I5w3AKe1UIKJVd79h5EZ?=
+ =?us-ascii?Q?OMyZ4w6Fq+Mxmv21L8lAKhr1kma72ROFMOQmy+ITxkpMmxLlyYmTZCd4HQTr?=
+ =?us-ascii?Q?IRtfJgzu6leL3N1/jLx4CXVZqh3KpdprSQkeGaGCbBOUlAogQnjzpt0ccFLO?=
+ =?us-ascii?Q?vb7CZmPB/TKNSu2ZfZvADsg+TmSPgOCHPl2eOsG3ZpJWRKmiLfWWEoXVfSL7?=
+ =?us-ascii?Q?sh3EjDtOrUEDXfHDg1nwTJ5kkPBVh0zMLvuFnoZReev9Kz0sIm5gaM1Yr2o?=
+ =?us-ascii?Q?=3D?=
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?us-ascii?Q?Wl6apPvJELRHBp4DAnpSJeTYFuPSyS25/FAXwFpPYQajYYv61tBFuvN4feh1?=
+ =?us-ascii?Q?KsVQUgmrWiAJNDzrVACnpUY/KEaeKZ+D97YXTyhZRDzCf1TQIw3c+hhNNCCh?=
+ =?us-ascii?Q?paZH/p4oEHvrHBaAMqweLKl3p6rWbbIP99dT6I1qoOJQduspLdDLQRQ/BAIi?=
+ =?us-ascii?Q?SNdOsTOAUtGbwmNhkT2CQ+jjc21Hg4/lz53vAQICs1NARYQe3hhw2jc7Pzs1?=
+ =?us-ascii?Q?/SveGzMamSFCs2ZbNo/0KkDle39BWOVVVGiFC4cApPOKQsAgbGVEinrkmuYF?=
+ =?us-ascii?Q?mpSzKJFhO1GE7k24d3FjTr132krnl21CbOGrKC2K6J9fUvsNv0ue1vdUGQsR?=
+ =?us-ascii?Q?kwZPPtxdDAoaMvafGuBFEUhNCWhL54wGdbLCmAvj8ZDkZ77uCYaj83FTra5F?=
+ =?us-ascii?Q?0CgNTYyQhMpG0icgjVbR5WVrd0ePfIKhbG5WPtGjAKqtOWn+ovGyudHhTZjO?=
+ =?us-ascii?Q?g/KMwI6NOou5k6mUDiFwzezdZcFXunRicuoj40w9wuadFK581Z6yQoCeX0os?=
+ =?us-ascii?Q?cwJrOsLX9brJj/9B7lrLVfoNT91dVRscdCbZH7MCNqW/ilywX8VA08v/EpKX?=
+ =?us-ascii?Q?y0kJr/3lCk18riFt8NX6PRoUMq4E3BZeQ9WOUhth0scZkFLiMSh3k4DNvDjl?=
+ =?us-ascii?Q?CyoO8+obM7sZ6krKa+VPpFZdNAfLa2LKuvWcRzR84hseTWojgK/E/c1n5sl+?=
+ =?us-ascii?Q?Qe8qexLm0+Y3eTI5LvryFfvhvDz8TnI8kHMAB5MZpYex1FlngInYdoVoEOJm?=
+ =?us-ascii?Q?flwn1FqHec1orCq4vqh/MsU6rio0F8nUJWHRdZmIMmBO803ZuM44b1Yu4MND?=
+ =?us-ascii?Q?4p2QLdguND2wqfPlH18fFmNyfIK31v36hsQ+equiNL9t2gTj/uKvrk8aJ+xR?=
+ =?us-ascii?Q?AbsY+mJwyeP0DAiJQA7L19IuQ6FpV/FlVzz4z0ZueIT4cJHjDwp2WJ97qUlE?=
+ =?us-ascii?Q?3JxoA/w7PZmBGaDdmzFnCnIqTvQU5xPPEDbLPtrcjS0ETFSl5Lyk51oXh1LU?=
+ =?us-ascii?Q?l5Bp2kJu8mJQdMgXKppiAc/7H600lSGmHIrLg/l8UJxgTWAQ4+54LdXQS3E4?=
+ =?us-ascii?Q?qG0hDnDDedafjihr3ksnNcv2FcD6uK6JWIzPnus8t9SiQNjdno8msHaDONsW?=
+ =?us-ascii?Q?mi0uohiJh4huTyISnAPQ00SX91AX+x7/MxVswph8gYF1CECJv8oaEeSnFCxS?=
+ =?us-ascii?Q?i6Bz+eA+WLDEVjNMVz3hoJXSdp2b/5dghlYMsmev6KONwNCcBS6teGzwrupT?=
+ =?us-ascii?Q?674LjQHzQSZr/DQRS6Io8bUztWMrN2a0yiugzyMUuA=3D=3D?=
+Content-Type: multipart/alternative;
+	boundary="_000_BYAPR12MB2742CECA81628318B53C0FA3F2CC2BYAPR12MB2742namp_"
+MIME-Version: 1.0
+X-OriginatorOrg: sct-15-20-7741-18-msonline-outlook-1cf9b.templateTenant
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BYAPR12MB2742.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-CrossTenant-Network-Message-Id: 925f682a-272c-4ce3-9be3-08dd57b368dc
+X-MS-Exchange-CrossTenant-originalarrivaltime: 28 Feb 2025 04:50:22.6115
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-rms-persistedconsumerorg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB6961
+
+--_000_BYAPR12MB2742CECA81628318B53C0FA3F2CC2BYAPR12MB2742namp_
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+This is sample text.
+
+Just some more bloated text.
+
+Here is the link<https://github.com/0xdeafdead/designli-assessment>
+
+Some more just to let link in the middle.
+
+--_000_BYAPR12MB2742CECA81628318B53C0FA3F2CC2BYAPR12MB2742namp_
+Content-Type: text/html; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
+>
+</head>
+<body>
+<div dir=3D"ltr">
+<div dir=3D"ltr" style=3D"font-family: Aptos, Arial, Helvetica, sans-serif;=
+ font-size: 12pt;">
+This is sample text.</div>
+<div dir=3D"ltr" style=3D"font-family: Aptos, Arial, Helvetica, sans-serif;=
+ font-size: 12pt;">
+<br>
+</div>
+<div dir=3D"ltr" style=3D"font-family: Aptos, Arial, Helvetica, sans-serif;=
+ font-size: 12pt;">
+Just some more bloated text.</div>
+<div dir=3D"ltr" style=3D"font-family: Aptos, Arial, Helvetica, sans-serif;=
+ font-size: 12pt;">
+<br>
+</div>
+<div dir=3D"ltr" style=3D"font-family: Aptos, Arial, Helvetica, sans-serif;=
+ font-size: 12pt;">
+Here is the <a href=3D"https://github.com/0xdeafdead/designli-assessment">l=
+ink</a>&nbsp;</div>
+<div dir=3D"ltr" style=3D"font-family: Aptos, Arial, Helvetica, sans-serif;=
+ font-size: 12pt;">
+<br>
+</div>
+<div dir=3D"ltr" style=3D"font-family: Aptos, Arial, Helvetica, sans-serif;=
+ font-size: 12pt;">
+Some more just to let link in the middle.</div>
+</div>
+</body>
+</html>
+
+--_000_BYAPR12MB2742CECA81628318B53C0FA3F2CC2BYAPR12MB2742namp_--
